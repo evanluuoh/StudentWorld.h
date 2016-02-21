@@ -1,0 +1,44 @@
+#ifndef STUDENTWORLD_H_
+#define STUDENTWORLD_H_
+
+#include "GameWorld.h"
+#include "GraphObject.h"
+#include "GameConstants.h"
+#include "Actor.h"
+#include <string>
+#include <iostream>
+#include <vector>
+
+// Students:  Add code to this file, StudentWorld.cpp, Actor.h, and Actor.cpp
+
+class StudentWorld : public GameWorld
+{
+public:
+	StudentWorld(std::string assetDir);
+	~StudentWorld();
+	virtual int init();
+	virtual int move();
+	virtual void cleanUp();
+	bool hitsDirt(Actor* a);
+	bool isDirt(int x, int y);
+	void removeDirt(int x, int y);
+	bool hitsRock(Actor* a, GraphObject::Direction dir);
+	void collide(Actor* a, int r);
+	void shootWater(GraphObject::Direction dir, int x, int y);
+	bool goodieDetected(Goodie* g);
+	void collectGoodie(Goodie* g);
+	int countWater();
+	int countSonar();
+	int countGold();
+	int countOil();
+private:
+	Dirt* m_dirt[64][64];
+	Frackman* m_player;
+	std::vector<Actor*> m_actors;
+	int m_water;
+	int m_sonar;
+	int m_gold;
+	int m_oil;
+};
+
+#endif // STUDENTWORLD_H_
